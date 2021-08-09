@@ -109,6 +109,7 @@ class antiNetworking:
 
         try:
             response = session.post("https://api.anti-captcha.com/"+method, data=json.dumps(data))
+            response.raise_for_status()
         except requests.exceptions.HTTPError as err:
             self.log("HTTPError", err.errno, err.strerror, err.args, err.filename)
             self.err_string = "http_error"
