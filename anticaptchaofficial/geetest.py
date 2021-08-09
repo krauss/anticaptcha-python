@@ -2,7 +2,7 @@ from anticaptchaofficial.antinetworking import *
 import time
 
 
-class geetestProxyon(antiNetworking):
+class geetest(antiNetworking):
 
     js_api_domain = ""
     gt = ""
@@ -13,18 +13,12 @@ class geetestProxyon(antiNetworking):
         if self.create_task({
             "clientKey": self.client_key,
             "task": {
-                "type": "GeeTestTask",
+                "type": "GeeTestTaskProxyless",
                 "websiteURL": self.website_url,
                 "gt": self.gt,
                 "challenge": self.challenge,
                 "geetestApiServerSubdomain": self.js_api_domain,
-                "geetestGetLib": self.geetest_lib,
-                "proxyType": self.proxy_type,
-                "proxyAddress": self.proxy_address,
-                "proxyPort": self.proxy_port,
-                "proxyLogin": self.proxy_login,
-                "proxyPassword": self.proxy_password,
-                "userAgent": self.user_agent
+                "geetestGetLib": self.geetest_lib
             }
         }) == 1:
             self.log("created task with id "+str(self.task_id))

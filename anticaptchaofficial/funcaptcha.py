@@ -2,7 +2,7 @@ from anticaptchaofficial.antinetworking import *
 import time
 
 
-class funcaptchaProxyon(antiNetworking):
+class funcaptcha(antiNetworking):
 
     js_api_domain = ""
     data_blob = ""
@@ -11,17 +11,11 @@ class funcaptchaProxyon(antiNetworking):
         if self.create_task({
             "clientKey": self.client_key,
             "task": {
-                "type": "FunCaptchaTask",
+                "type": "FunCaptchaTaskProxyless",
                 "websiteURL": self.website_url,
                 "funcaptchaApiJSSubdomain": self.js_api_domain,
                 "data": self.data_blob,
-                "websitePublicKey": self.website_key,
-                "proxyType": self.proxy_type,
-                "proxyAddress": self.proxy_address,
-                "proxyPort": self.proxy_port,
-                "proxyLogin": self.proxy_login,
-                "proxyPassword": self.proxy_password,
-                "userAgent": self.user_agent
+                "websitePublicKey": self.website_key
             }
         }) == 1:
             self.log("created task with id "+str(self.task_id))
@@ -42,6 +36,3 @@ class funcaptchaProxyon(antiNetworking):
 
     def set_data_blob(self, value):
         self.data_blob = value
-
-
-

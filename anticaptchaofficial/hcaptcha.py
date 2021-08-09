@@ -2,20 +2,15 @@ from anticaptchaofficial.antinetworking import *
 import time
 
 
-class funcaptchaProxyless(antiNetworking):
-
-    js_api_domain = ""
-    data_blob = ""
+class hCaptcha(antiNetworking):
 
     def solve_and_return_solution(self):
         if self.create_task({
             "clientKey": self.client_key,
             "task": {
-                "type": "FunCaptchaTaskProxyless",
+                "type": "HCaptchaTaskProxyless",
                 "websiteURL": self.website_url,
-                "funcaptchaApiJSSubdomain": self.js_api_domain,
-                "data": self.data_blob,
-                "websitePublicKey": self.website_key
+                "websiteKey": self.website_key
             }
         }) == 1:
             self.log("created task with id "+str(self.task_id))
@@ -25,17 +20,8 @@ class funcaptchaProxyless(antiNetworking):
             return 0
         #checking result
         time.sleep(3)
-        task_result = self.wait_for_result(600)
+        task_result = self.wait_for_result(300)
         if task_result == 0:
             return 0
         else:
-            return task_result["solution"]["token"]
-
-    def set_js_api_domain(self, value):
-        self.js_api_domain = value
-
-    def set_data_blob(self, value):
-        self.data_blob = value
-
-
-
+            return task_result["solution"]["gRecaptchaResponse"]
